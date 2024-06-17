@@ -1,6 +1,8 @@
 # MK7 PID Grabber
 This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on the 3DS.
 
+> Anti Spoof is not included in this version, that method will remain private.
+
 # How to use the file
 Join my [Discord](https://discord.gg/8Gv4SY3A) that has all info in one place.
 
