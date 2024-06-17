@@ -12,3 +12,10 @@ Get the latest version of:
 - [libctrpf](https://gitlab.com/thepixellizeross/ctrpluginframework/-/releases)
 
 after that, simply run the `build.bat` file and wait till it compiled.
+
+# Credits
+
+- H4x0rSpooky, myself, for creating this project
+- [Anto726](https://github.com/Anto726) for the things he taught me
+- [Nanquitas](https://github.com/Nanquitas) for creating CTRPluginFramework
+- [PabloMK7](https://github.com/PabloMK7) for maintaining CTRPluginFramework
