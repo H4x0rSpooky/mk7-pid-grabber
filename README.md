@@ -6,6 +6,10 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 # How to use or build the file
 Join my [Discord](https://discord.com/invite/CjG866FBty) that has all info.
 
+# Reporting bugs or issues
+Just direct message me on Discord.
+My username: h4x0rspooky
+
 # Credits
 
 - H4x0rSpooky for creating this project
