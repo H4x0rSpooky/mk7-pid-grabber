@@ -4,7 +4,7 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 > Anti Spoof is not included in this version, that method will remain private.
 
 # How to use or build the file
-Join my [Discord](https://discord.gg/8Gv4SY3A) that has all info.
+Join my [Discord](https://discord.com/invite/CjG866FBty) that has all info.
 
 # Credits
 
