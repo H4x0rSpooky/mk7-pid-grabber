@@ -1,4 +1,4 @@
-#include <utils.hpp>
+#include <utilities.hpp>
 
 // menu attributes
 #define TITLE "MK7 PID Grabber CTRPF"
@@ -14,13 +14,11 @@ namespace CTRPluginFramework
     int		main(void)
 	{
         // check if the game is Mario Kart 7
-        if (!utils::check_process("MarioKar"))
+        if (!utilities::check_process("MarioKar"))
         {
             Sleep(Seconds(1));
 
             Process::ReturnToHomeMenu();
-
-            return EXIT_FAILURE;
         }
 
         const std::vector<u8> pattern =
@@ -34,15 +32,12 @@ namespace CTRPluginFramework
         // get the sig for Net::NetworkPlayerDataManager::getNetworkPlayerData
         u32 getNetworkPlayerData = Utils::Search(TEXT_BASE, Process::GetTextSize(), pattern);
 
+        // abort if the function wasn't found
         if (!getNetworkPlayerData)
-        {
             abort();
 
-            return EXIT_FAILURE;
-        }
-
         // prepare the function call for Net::NetworkPlayerDataManager::getNetworkPlayerData
-        static auto GetNetworkPlayerData = reinterpret_cast<NetworkPlayerData * (*)(u32, u32)>(getNetworkPlayerData);
+        static auto GetNetworkPlayerData = reinterpret_cast<Net::NetworkPlayerData * (*)(u32, u32)>(getNetworkPlayerData);
 
         // create the plugin menu
         auto menu = new PluginMenu(TITLE, ABOUT, TYPE);
@@ -56,7 +51,7 @@ namespace CTRPluginFramework
         *menu += new MenuEntry(NAME, nullptr, [](MenuEntry *entry)
         {
             // fetch the network engine instance from memory
-            auto network_engine = *reinterpret_cast<NetworkEngine **>(NETWORK_ENGINE);
+            auto network_engine = *reinterpret_cast<Net::NetworkEngine **>(NETWORK_ENGINE);
 
             if (!network_engine)
                 return;
@@ -77,7 +72,7 @@ namespace CTRPluginFramework
                     auto player_data = GetNetworkPlayerData(network_engine->network_player_data_mgr, i);
 
                     // convert the name into the right format
-                    std::string name = utils::parse_name(player_data);
+                    std::string name = utilities::parse_name(player_data);
 
                     // add the player to the list
                     list.push_back({ name, player_data->principal_id, player_data->connected });
@@ -92,7 +87,7 @@ namespace CTRPluginFramework
                         items.push_back(i.name);
                     
                     // create a selection for the user to navigate through the list
-                    Keyboard keyboard(Color::White << "Select a player", items);
+                    Keyboard keyboard(Color::Turquoise << "Select a player" << Color::White << " | " << utilities::format_output("Current Amount", Utils::Format("%d", (network_engine->station_buffer_mgr->peer_amount - 1)), false), items);
                     keyboard.CanAbort(true);
                     
                     // get the user choice
@@ -108,33 +103,16 @@ namespace CTRPluginFramework
                         {
                             static std::string message_box{};
 
-                            // format and add the pid string
-                            message_box += Color::SkyBlue << "Principal ID" << Color::White << ": " << Color::LimeGreen << "0x" << Utils::ToHex(player.principal_id);
+                            // format and add the principal id
+                            message_box += utilities::format_output("Principal ID", "0x" << Utils::ToHex(player.principal_id), false);
                             
-                            if (R_SUCCEEDED(frdInit()))
-                            {
-                                u64 friendcode{};
+                            u64 friendcode = utilities::pid_to_fc(player.principal_id);
 
-                                if (R_SUCCEEDED(FRD_PrincipalIdToFriendCode(player.principal_id, &friendcode)))
-                                {
-                                    bool validation = false;
-
-                                    if (R_SUCCEEDED(FRD_IsValidFriendCode(friendcode, &validation)) && validation)
-                                    {
-                                        // format the friend code properly
-                                        std::string fc = utils::format_friendcode(friendcode);
-
-                                        // format and add the friend code string
-                                        message_box += Color::SkyBlue << "\nFriend Code" << Color::White << ": " << Color::LimeGreen << fc;
-                                    }
-                                    else // let the user know the pid is invalid
-                                        message_box += Color::Orange << "\n\nThe Principal ID is invalid.";
-                                }
-                                else // let the user know the pid is invalid
-                                    message_box += Color::Orange << "\n\nThe Principal ID is invalid.";
-                            
-                                frdExit();
-                            }
+                            // check if the fc is valid, if yes, format and add the friend code
+                            if (friendcode && utilities::is_valid_fc(friendcode))
+                                message_box += utilities::format_output("Friend Code", utilities::format_friendcode(friendcode), true);
+                            else // let the user know the pid is invalid
+                                message_box += Color::Orange << "\n\nThe Principal ID is invalid.";
 
                             // display the message box string
                             MessageBox(Color::DodgerBlue << player.name, message_box, DialogType::DialogOk, ClearScreen::Both)();
@@ -154,9 +132,12 @@ namespace CTRPluginFramework
 
     void    PatchProcess(FwkSettings &settings)
     {
-        settings.CachedDrawMode = true;
+        settings.CachedDrawMode = false;
+        settings.TryLoadSDSounds = false;
 		settings.AllowActionReplay = false;
 		settings.AllowSearchEngine = false;
+
+        settings.UseGameHidMemory = true;
 
         settings.SetThemeDefault();
     }

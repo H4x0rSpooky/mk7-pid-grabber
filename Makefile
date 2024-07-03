@@ -13,10 +13,10 @@ CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
-CTRPF		:=	include/ctrpf
+DEBUG		:=	debug
 
 INCLUDES	:= 	include	\
-				$(CTRPF)
+				include/ctrpf
 
 SOURCES 	:= 	src
 
@@ -33,7 +33,7 @@ CFLAGS		+=	$(INCLUDE) -D__3DS__
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-psabi -std=gnu++23
 
 ASFLAGS		:=	$(ARCH)
-LDFLAGS		:= -T $(TOPDIR)/$(CTRPF)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
+LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
 
 LIBS		:=	-lctrpf -lctru
 LIBDIRS		:= 	$(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
@@ -70,6 +70,7 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 all: $(BUILD)
 
 $(BUILD):
+	@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
@@ -77,6 +78,8 @@ $(BUILD):
 clean:
 	@echo clean ... 
 	@rm -fr $(BUILD) $(OUTPUT).3gx
+	@rm -fr $(TOPDIR)/$(DEBUG)/*.lst
+	@rm -fr $(TOPDIR)/$(DEBUG)/*.elf
 
 re: clean all
 
@@ -104,7 +107,12 @@ $(OUTPUT).elf : $(OFILES)
 %.3gx: %.elf
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
-	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(CTRPF)/$(PLGINFO) $@
+	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
+	@cp $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
+	@rm -fr $(TOPDIR)/$(BUILD)/*.lst
+	@cp $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
+	@rm -fr $(TOPDIR)/*.elf
+	@echo $(PLGNAME).3gx successfully created!
 
 -include $(DEPENDS)
 
