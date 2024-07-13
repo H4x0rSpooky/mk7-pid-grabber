@@ -3,6 +3,7 @@
 #include <types.hpp>
 
 #define NETWORK_ENGINE 0x663D00
+#define SAVE_DATA 0x6673C8
 #define TEXT_BASE 0x100000
 
 #define DEFAULT_NAME "Player"

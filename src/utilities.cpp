@@ -40,11 +40,11 @@ namespace CTRPluginFramework
         {
             u64 friendcode{};
             
-            FRD_PrincipalIdToFriendCode(principal_id, &friendcode);
+            bool res = R_SUCCEEDED(FRD_PrincipalIdToFriendCode(principal_id, &friendcode));
             
             frdExit();
 
-            return friendcode;
+            return res ? friendcode : 0;
         }
 
         return {};
@@ -56,11 +56,11 @@ namespace CTRPluginFramework
         {
             bool is_valid = false;
 
-            FRD_IsValidFriendCode(friendcode, &is_valid);
+            bool res = R_SUCCEEDED(FRD_IsValidFriendCode(friendcode, &is_valid));
             
             frdExit();
 
-            return is_valid;
+            return res ? is_valid : res;
         }
 
         return false;

@@ -77,9 +77,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ... 
-	@rm -fr $(BUILD) $(OUTPUT).3gx
-	@rm -fr $(TOPDIR)/$(DEBUG)/*.lst
-	@rm -fr $(TOPDIR)/$(DEBUG)/*.elf
+	@rm -fr $(DEBUG) $(BUILD) $(OUTPUT).3gx
 
 re: clean all
 
@@ -108,10 +106,8 @@ $(OUTPUT).elf : $(OFILES)
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
 	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
-	@cp $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
-	@rm -fr $(TOPDIR)/$(BUILD)/*.lst
-	@cp $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
-	@rm -fr $(TOPDIR)/*.elf
+	@-mv $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
+	@-mv $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
 	@echo $(PLGNAME).3gx successfully created!
 
 -include $(DEPENDS)
