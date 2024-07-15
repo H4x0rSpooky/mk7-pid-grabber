@@ -44,7 +44,7 @@ namespace CTRPluginFramework
             
             frdExit();
 
-            return res ? friendcode : 0;
+            return (res ? friendcode : 0);
         }
 
         return {};
@@ -60,9 +60,16 @@ namespace CTRPluginFramework
             
             frdExit();
 
-            return res ? is_valid : res;
+            return (res && is_valid);
         }
 
         return false;
+    }
+
+    Net::NetworkPlayerData * utilities::get_network_player_data(u8 player_id)
+    {
+        auto network_engine = *reinterpret_cast<Net::NetworkEngine **>(NETWORK_ENGINE);
+
+        return &network_engine->network_player_data_mgr->players[player_id];
     }
 }

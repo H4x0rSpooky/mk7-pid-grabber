@@ -3,7 +3,7 @@
 #include <types.hpp>
 
 #define NETWORK_ENGINE 0x663D00
-#define SAVE_DATA 0x6673C8
+#define OPPONENT_LIST 0x659B44
 #define TEXT_BASE 0x100000
 
 #define DEFAULT_NAME "Player"
@@ -20,5 +20,6 @@ namespace CTRPluginFramework
         static std::string format_friendcode(u64);
         static u64 pid_to_fc(u32);
         static bool is_valid_fc(u64);
+        static Net::NetworkPlayerData * get_network_player_data(u8);
     };
 }

@@ -18,7 +18,8 @@ DEBUG		:=	debug
 INCLUDES	:= 	include	\
 				include/ctrpf
 
-SOURCES 	:= 	src
+SOURCES 	:= 	src \
+				src/entries
 
 #---------------------------------------------------------------------------------
 # options for code generation
