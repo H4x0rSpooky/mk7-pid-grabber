@@ -9,7 +9,7 @@ Join my [Discord](https://discord.com/invite/CjG866FBty) that has all info.
 # Reporting bugs or issues
 Just direct message me on Discord.
 
-- My username: h4x0rspooky
+- **My username:** `h4x0rspooky`
 
 # Credits
 
