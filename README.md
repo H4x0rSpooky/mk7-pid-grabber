@@ -4,7 +4,9 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 > Anti Spoof is not included in this version, that method will remain private.
 
 # How to use
-Hold Select to open the menu.
+1. Move the 3GX file to `/luma/plugins/0004000000030800`.
+2. Open Mario Kart 7.
+3. Hold Select to open the menu.
 
 # Reporting bugs or issues
 Just direct message me on Discord.
