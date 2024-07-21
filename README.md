@@ -4,7 +4,7 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 It's purpose is to allow people to report cheaters in their in-game lobbies or opponent list on platforms like [Pretendo](https://pretendo.network/).
 
 > [!TIP]
-> The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps people be unique and to identify them.
+> The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps users to be unique and to differentiate them.
 
 > [!NOTE]
 > Principal IDs can still be spoofed, I might include a method to get the clean Principal ID instead in the future.
