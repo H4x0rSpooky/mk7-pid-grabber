@@ -4,7 +4,6 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 It's purpose is to allow people to report cheaters in their in-game lobbies or opponent list on platforms like [Pretendo](https://pretendo.network/).
 
 > [!NOTE]
-__Disclaimer__
 > Principal IDs can still be spoofed, I might include a method to get the clean Principal ID instead in the future.
 
 # How to use the plugin
@@ -13,18 +12,18 @@ Head over to the [releases](https://github.com/H4x0rSpooky/mk7-pid-grabber/relea
 Create a folder on your system's sd card: `sd:luma/plugins/<Title ID >/`.
 
 Use the the following `Title ID` depending on your version:
-**USA**: `0004000000030800`
-**EUR**: `0004000000030700`
-**JPN**: `0004000000030600`
+- **USA**: `0004000000030800`
+- **EUR**: `0004000000030700`
+- **JPN**: `0004000000030600`
 
 > [!NOTE]
-> There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or [3dsdb](https://3dsdb.com/).
+> There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or check out [3dsdb](https://3dsdb.com/).
 
-Once that's done, place the `mk7-pid-grabber.3gx` file into the folder you just created.
+Once that's done, simply place the `mk7-pid-grabber.3gx` file into the folder you just created.
 
-While you're in thr HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, simply close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps once more.
+While you're in thr HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, simply close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
 
-The default menu activator for `CTRPF` is `Select`, this is the creators' choice however.
+The default menu activator for `CTRPF` is `Select`, this is the creators' choice.
 
 # How to build the project
 > [!NOTE]
