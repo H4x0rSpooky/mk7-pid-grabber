@@ -3,13 +3,16 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 
 It's purpose is to allow people to report cheaters in their in-game lobbies or opponent list on platforms like [Pretendo](https://pretendo.network/).
 
+**What is a Principal ID?**
+The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps people be unique and to identify them.
+
 > [!NOTE]
 > Principal IDs can still be spoofed, I might include a method to get the clean Principal ID instead in the future.
 
 # How to use the plugin
 Head over to the [releases](https://github.com/H4x0rSpooky/mk7-pid-grabber/releases/latest) and grab the latest `mk7-pid-grabber.3gx` file.
 
-Create a folder on your system's sd card: `sd:luma/plugins/<Title ID >/`.
+Create a folder on your system's sd card: `sd:luma/plugins/<Title ID>/`.
 
 Use the the following `Title ID` depending on your version:
 - **USA**: `0004000000030800`
@@ -17,7 +20,7 @@ Use the the following `Title ID` depending on your version:
 - **JPN**: `0004000000030600`
 
 > [!NOTE]
-> There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or check out [3dsdb](https://3dsdb.com/).
+> There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or [3dsdb](https://3dsdb.com/).
 
 Once that's done, simply place the `mk7-pid-grabber.3gx` file into the folder you just created.
 
