@@ -7,7 +7,7 @@ It's purpose is to allow people to report cheaters in their in-game lobbies or o
 > The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps users to be unique and to differentiate them.
 
 > [!IMPORTANT]
-> Principal IDs can still be spoofed, I might include a method to get the clean Principal ID instead in the future.
+> Principal IDs can still be spoofed, which can lead to false reports. A method to get the clean Principal ID instead might be included in the future.
 
 # How to use the plugin
 Head over to the [releases](https://github.com/H4x0rSpooky/mk7-pid-grabber/releases/latest) and grab the latest `mk7-pid-grabber.3gx` file.
@@ -22,7 +22,7 @@ Use the the following `Title ID` depending on your version:
 > [!NOTE]
 > There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or [3dsdb](https://3dsdb.com/).
 
-Once that's done, simply place the `mk7-pid-grabber.3gx` file into the folder you just created.
+Once that's done, place the `mk7-pid-grabber.3gx` file into the folder you just created.
 
 While you're in thr HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, simply close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
 
@@ -39,7 +39,7 @@ Make sure you have the latest version of:
 
 After that, download the source code and follow the steps to install [CTRPluginFramework](https://gitlab.com/thepixellizeross/ctrpluginframework). Don't forget to also run `pacman -S 3gxtool` in order to install [3gxtool](https://gitlab.com/thepixellizeross/3gxtool) which is required to compile `3gx` files.
 
-Once all the steps are completed, run the `build.bat` file inside the source and let it compile the file.
+Once all the steps are completed, run the `build.bat` file inside the source and let it compile the file. After that, you can simply use it like described above this section.
 
 # Reporting bugs or issues
 Just direct message me on Discord.
