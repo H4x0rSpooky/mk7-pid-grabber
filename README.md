@@ -22,7 +22,7 @@ Use the the following `Title ID` depending on your version:
 > [!NOTE]
 > There are more versions however those are the most common ones. If yours isn't included in this, find it through `FBI` under installed titles or [3dsdb](https://3dsdb.com/).
 
-Once that's done, place the `mk7-pid-grabber.3gx` file into the folder you just created.
+Once that's done, place the `mk7-pid-grabber.3gx` file into the same folder.
 
 While you're in thr HOME-menu, open the `Rosalina Menu`. The key combination to enter it is `L + DPad Down + Select`. Navigate to the `Plugin Loader`, press `A` on it once to change it to `Enabled` and go to `Save Settings`. After that, simply close the menu again and launch your game. It should flash blue once, which indicates that the plugin has successfully been loaded. If that doesn't occur, you did something wrong and should go through these steps again.
 
