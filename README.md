@@ -6,7 +6,7 @@ It's purpose is to allow people to report cheaters in their in-game lobbies or o
 > [!TIP]
 > The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps users to be unique and to differentiate them.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Principal IDs can still be spoofed, I might include a method to get the clean Principal ID instead in the future.
 
 # How to use the plugin
@@ -43,6 +43,9 @@ Once all the steps are completed, run the `build.bat` file inside the source and
 
 # Reporting bugs or issues
 Just direct message me on Discord.
+
+> [!WARNING]
+> If you're not being civil about your report, I'll either ignore it or match your immaturity's energy. It sadly already happened, which lead to a person creating a fork with misleading information, so be aware of that.
 
 **My username:** `h4x0rspooky`
 > [!CAUTION]
