@@ -4,7 +4,7 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 > Anti Spoof is not included in this version, that method will remain private.
 
 # How to use or build the file
-Join my [Discord](https://discord.com/invite/CjG866FBty) that has all info.
+Find out yourself :) people assume that I try to grow my discord while it's only purpose was to have proper written out instructions on how to build 3gx files and how to properly use them. Therefore I'll leave it in your hands to figure out.
 
 # Reporting bugs or issues
 Just direct message me on Discord.
