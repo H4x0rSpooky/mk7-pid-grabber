@@ -3,8 +3,8 @@ This is a Principal ID grabber CTRPluginFramework designed for Mario Kart 7 on t
 
 > Anti Spoof is not included in this version, that method will remain private.
 
-# How to use or build the file
-Join my [Discord](https://discord.com/invite/CjG866FBty) that has all info.
+# How to use
+Hold Select to open the menu.
 
 # Reporting bugs or issues
 Just direct message me on Discord.
