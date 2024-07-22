@@ -30,7 +30,7 @@ The default menu activator for `CTRPF` is `Select`, this is the creators' choice
 
 # How to build the project
 > [!NOTE]
-> This is for Windows users
+> This is for Windows users.
 
 Make sure you have the latest version of:
 - [git](https://git-scm.com/downloads)
