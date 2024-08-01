@@ -7,37 +7,48 @@ endif
 TOPDIR 		?= 	$(CURDIR)
 include $(DEVKITARM)/3ds_rules
 
-TARGET		:= 	$(notdir $(CURDIR))
+CTRPFLIB	?=	$(DEVKITPRO)/libctrpf
 
-CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
+NAME		:=	mk7-pid-grabber
+ABOUT		:=	$(NAME) is a CTRPluginFramework for Mario Kart 7.
+
+TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
 DEBUG		:=	debug
 
-INCLUDES	:= 	include	\
-				include/ctrpf
+INCLUDES	:= 	include \
+				include/ctrpf \
+				include/glaze \
+				include/base
 
 SOURCES 	:= 	src \
-				src/entries
+				src/base \
+				src/base/entries \
+				src/base/features \
+				src/base/hook_types \
+				src/base/hooks \
+				src/base/memory \
+				src/base/services
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+ARCH		:= -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-CFLAGS		:=	$(ARCH) -Os -mword-relocations \
-				-fomit-frame-pointer -ffunction-sections -fno-strict-aliasing
+DEFINES 	:= -D__3DS__ -DNNSDK -DNAME="\"$(NAME)\"" -DABOUT="\"$(ABOUT)\""
 
-CFLAGS		+=	$(INCLUDE) -D__3DS__
+CFLAGS		:= $(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-psabi
+CFLAGS		+= $(INCLUDE) $(DEFINES)
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-psabi -std=gnu++23
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++23
 
-ASFLAGS		:=	$(ARCH)
+ASFLAGS		:= $(ARCH)
 LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
 
-LIBS		:=	-lctrpf -lctru
-LIBDIRS		:= 	$(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
+LIBS		:= -lctrpf -lctru
+LIBDIRS		:= $(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
@@ -46,7 +57,7 @@ LIBDIRS		:= 	$(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 #---------------------------------------------------------------------------------
 
-export OUTPUT	:=	$(CURDIR)/$(PLGNAME)
+export OUTPUT	:=	$(CURDIR)/$(NAME)
 export TOPDIR	:=	$(CURDIR)
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
 					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
@@ -78,7 +89,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ... 
-	@rm -fr $(DEBUG) $(BUILD) $(OUTPUT).3gx
+	@rm -fr $(DEBUG) $(BUILD) $(OUTPUT).3gx $(OUTPUT).elf
 
 re: clean all
 
@@ -91,8 +102,7 @@ DEPENDS	:=	$(OFILES:.o=.d)
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(OUTPUT).3gx : $(OUTPUT).elf
-$(OUTPUT).elf : $(OFILES)
+$(OUTPUT).3gx : $(OFILES)
 
 #---------------------------------------------------------------------------------
 # you need a rule like this for each extension you use as binary data
@@ -103,13 +113,14 @@ $(OUTPUT).elf : $(OFILES)
 	@$(bin2o)
 
 #---------------------------------------------------------------------------------
+#.PRECIOUS: %.elf
 %.3gx: %.elf
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
 	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
 	@-mv $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
 	@-mv $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
-	@echo $(PLGNAME).3gx successfully created!
+	@echo $(NAME).3gx successfully created!
 
 -include $(DEPENDS)
 

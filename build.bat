@@ -1,3 +1,3 @@
 @echo off
-make re PLGNAME=mk7-pid-grabber
+make re
 pause
