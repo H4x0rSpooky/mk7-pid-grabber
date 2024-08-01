@@ -6,9 +6,6 @@ It's purpose is to allow people to report cheaters in their in-game lobbies or o
 > [!TIP]
 > The Principal ID is the identifier of any user on the Nintendo 3DS. It's basically the friend code of the system but packed into a different series of numbers. It helps users to be unique and to differentiate them.
 
-> [!IMPORTANT]
-> Principal IDs can still be spoofed, which can lead to false reports. A method to get the clean Principal ID instead might be included in the future.
-
 # How to use the plugin
 Head over to the [releases](https://github.com/H4x0rSpooky/mk7-pid-grabber/releases/latest) and grab the latest `mk7-pid-grabber.3gx` file.
 
@@ -29,9 +26,6 @@ While you're in the HOME-menu, open the `Rosalina Menu`. The key combination to 
 The default menu activator for `CTRPF` is `Select`, this is the creators' choice.
 
 # How to build the project
-> [!NOTE]
-> This is for Windows users
-
 Make sure you have the latest version of:
 - [git](https://git-scm.com/downloads)
 - [devkitPro](https://devkitpro.org/wiki/Getting_Started)
@@ -44,15 +38,13 @@ Once all the steps are completed, run the `build.bat` file inside the source and
 # Reporting bugs or issues
 Just direct message me on Discord.
 
+**My username:** `h4x0rspooky`
+
 > [!WARNING]
 > If you're not being civil about your report, I'll either ignore it or match your immaturity's energy. It sadly already happened, which lead to a person creating a fork with misleading information, so be aware of that.
 
-**My username:** `h4x0rspooky`
-> [!CAUTION]
-> Any other person isn't me
-
 # Credits
 - H4x0rSpooky for creating this project
-- [Anto726](https://github.com/Anto726) for the things he taught me
-- [Nanquitas](https://github.com/Nanquitas) for creating CTRPluginFramework
-- [PabloMK7](https://github.com/PabloMK7) for maintaining CTRPluginFramework
+- [Anto726](https://github.com/Anto726) for the [CTRPluginFramework-RevolutionBase](https://github.com/Anto726/CTRPluginFramework-RevolutionBase)
+- [Nanquitas](https://github.com/Nanquitas) for creating the CTRPluginFramework
+- [PabloMK7](https://github.com/PabloMK7) for maintaining the CTRPluginFramework
