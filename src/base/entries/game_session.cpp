@@ -47,8 +47,8 @@ namespace base
                     {
                         std::string message_box{};
 
-                        message_box += utilities::format_output("Principal ID", std::to_string(player.info.principal_id), false);
-
+                        message_box += utilities::format_output("Principal ID (DEC)", std::to_string(player.info.principal_id), false);
+                        message_box += utilities::format_output("Principal ID (HEX)", "0x" << Utils::ToHex(player.info.principal_id), true);
                         message_box += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(player.info.principal_id)), true);
                         
                         MessageBox(Color::DodgerBlue << player.info.name, message_box, DialogType::DialogOk, ClearScreen::Both)();

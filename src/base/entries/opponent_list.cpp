@@ -41,11 +41,9 @@ namespace base
 
                 std::string message_box{};
 
-                message_box += utilities::format_output("Principal ID", std::to_string(player.principal_id), false);
-                
-                u64 friendcode = utilities::pid_to_fc(player.principal_id);
-
-                message_box += utilities::format_output("Friend Code", utilities::format_friendcode(friendcode), true);
+                message_box += utilities::format_output("Principal ID (DEC)", std::to_string(player.principal_id), false);
+                message_box += utilities::format_output("Principal ID (HEX)", "0x" << Utils::ToHex(player.principal_id), true);
+                message_box += utilities::format_output("Friend Code", utilities::format_friendcode(utilities::pid_to_fc(player.principal_id)), true);
 
                 MessageBox(Color::DodgerBlue << player.name, message_box, DialogType::DialogOk, ClearScreen::Both)();
             }
