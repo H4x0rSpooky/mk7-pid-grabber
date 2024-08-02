@@ -32,7 +32,22 @@ namespace base
 		{
 			m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData = handle.as<decltype(m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData)>();
 		});
-		
+
+		batch.add("Sequence::RacePage::initControl_WiFiVS", "70 40 2D E9 00 40 A0 E1 ? ? ? EB ? ? ? EB 00 00 50 E3 04 00 A0 E1 01 00 00 0A ? ? ? EB ", [this](memory::handle handle)
+		{
+			m_Sequence_RacePage_initControl_WiFiVS = handle.as<decltype(m_Sequence_RacePage_initControl_WiFiVS)>();
+		});
+
+		batch.add("Sequence::RacePage::initControl_WiFiBattle", "70 40 2D E9 00 40 A0 E1 74 02 90 E5 00 00 50 E3 03 00 00 0A 01 00 50 E3 04 00 A0 01", [this](memory::handle handle)
+		{
+			m_Sequence_RacePage_initControl_WiFiBattle = handle.as<decltype(m_Sequence_RacePage_initControl_WiFiBattle)>();
+		});
+
+		batch.add("Sequence::BaseRacePage::initRankBoard", "F0 4F 2D E9 F4 D0 4D E2 00 40 A0 E1 ? ? ? EB D0 00 8D E5 ? ? 9F E5 10 00 90 E5", [this](memory::handle handle)
+		{
+			init_rankBoard = reinterpret_cast<decltype(init_rankBoard)>(handle.as<void *>());
+		});
+
 		batch.run(memory::ranges::c_text);
 
 		g_pointers = this;
