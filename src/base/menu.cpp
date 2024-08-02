@@ -29,8 +29,6 @@ namespace base
 
         m_plugin_menu->OnNewFrame = [](Time)
         {
-            auto &settings = FwkSettings::Get();
-
             g_rainbow_service->run();
 
             auto const color = g_rainbow_service->get_ctrpf_color();
