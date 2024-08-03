@@ -1,7 +1,5 @@
 #include <base/services/rainbow_service.hpp>
 
-#include <base/settings.hpp>
-
 #include <math.h>
 
 #define PACK_U8(x) (static_cast<u8>(x * std::numeric_limits<u8>::max()))
@@ -20,12 +18,12 @@ namespace base
 
     void rainbow_service::run()
     {
-        m_hue += g_settings.m_options.base.rainbow.hue_amount;
+        m_hue += (1.f / 600.f);
     }
 
     rainbow_service::rgb rainbow_service::get_color()
     {
-        return hsv{ m_hue, g_settings.m_options.base.rainbow.saturation, g_settings.m_options.base.rainbow.value }.to_rgb();
+        return hsv{ m_hue, 1.f, 1.f }.to_rgb();
     }
 
     CTRPluginFramework::Color rainbow_service::get_ctrpf_color()

@@ -3,6 +3,7 @@
 #include <base/entries.hpp>
 #include <base/hooking.hpp>
 #include <base/settings.hpp>
+#include <base/patches.hpp>
 
 #include <base/services/rainbow_service.hpp>
 
@@ -11,6 +12,7 @@
 
 #define GAME_SESSION_NOTE Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID.\n\n" << Color::SkyBlue << "This fetches the current players inside an active game session or current lobby."
 #define OPPONENT_LIST_NOTE Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID.\n\n" << Color::SkyBlue << "This fetches only the opponent list from your save data, excluding the friend list."
+#define RENDER_OPTIMIZATIONS_NOTE Color::SkyBlue << "This entry disables the 3D and uncaps the FPS on the bottom screen during races.\n\n"
 
 namespace base
 {
@@ -21,7 +23,10 @@ namespace base
         m_plugin_menu(new PluginMenu(NAME, ABOUT, MENU_TYPE)),
 
         m_game_session_entry(new MenuEntry(Color::SkyBlue << "Game Session", nullptr, entries::game_session, GAME_SESSION_NOTE)),
-        m_opponent_list_entry(new MenuEntry(Color::SkyBlue << "Opponent List", nullptr, entries::opponent_list, OPPONENT_LIST_NOTE))
+        m_opponent_list_entry(new MenuEntry(Color::SkyBlue << "Opponent List", nullptr, entries::opponent_list, OPPONENT_LIST_NOTE)),
+        m_render_optimizations_entry(new MenuEntry(Color::SkyBlue << "Render Optimizations", entries::render_optimizations, RENDER_OPTIMIZATIONS_NOTE)),
+        m_load_rankboard_in_spectate_entry(new MenuEntry("Load Rankboard In Spectate", DEFAULT_ENTRY)),
+        m_show_mii_heads_entry(new MenuEntry("Show Mii Heads", entries::show_mii_heads))
     {
         m_plugin_menu->SynchronizeWithFrame(true);
         m_plugin_menu->ShowWelcomeMessage(false);
@@ -61,9 +66,15 @@ namespace base
     {
         *m_plugin_menu += m_game_session_entry;
         *m_plugin_menu += m_opponent_list_entry;
+        *m_plugin_menu += m_render_optimizations_entry;
     }
 
     void menu::finalize()
     {
+        m_load_rankboard_in_spectate_entry->Enable();
+        m_show_mii_heads_entry->Enable();
+
+        if (g_settings.m_options.render_optimizations)
+            m_render_optimizations_entry->Enable();
     }
 }

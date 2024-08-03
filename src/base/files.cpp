@@ -8,15 +8,12 @@ namespace base
 
 	files::files()
 	{
-        auto const logs_path = std::string("logs");
-
-        if (!Directory::IsExists(logs_path))
-            Directory::Create(logs_path);
-
-        auto logger_path = logs_path + "/" + logger::get_current_date_time_string(false) + ".log";
-        
+        auto logger_path = "session.log";
+            
         if (File::Open(m_logger, logger_path, File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
+        
+        m_logger.Clear();
 
         auto settings_path = "settings.json";
         

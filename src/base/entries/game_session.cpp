@@ -2,8 +2,6 @@
 
 #include <base/pointers.hpp>
 
-#include <CTRPluginFramework.hpp>
-
 using namespace CTRPluginFramework;
 
 namespace base

@@ -2,8 +2,6 @@
 
 #include <base/memory/all.hpp>
 
-#include <base/notifier.hpp>
-
 namespace base
 {
 	pointers::pointers()
@@ -50,7 +48,40 @@ namespace base
 			init_rankBoard = reinterpret_cast<decltype(init_rankBoard)>(handle.as<void *>());
 		});
 
+		batch.add("System::ProjectGameFramework::procDraw_", "44 01 9F E5 20 60 94 E5 00 00 90 E5 06 50 A0 E1", [this](memory::handle handle)
+		{
+			m_System_ProjectGameFramework_procDraw = handle.sub(0x10).as<decltype(m_System_ProjectGameFramework_procDraw)>();
+		});
+
+		batch.add("System::ProjectGameFramework::procFrame_", "00 60 90 E5 00 00 99 E5 ? ? ? EB 02 4A 85 E2 78 00 94 E5 00 01 85 E0", [this](memory::handle handle)
+		{
+			m_System_ProjectGameFramework_procFrame = handle.sub(0x14).as<decltype(m_System_ProjectGameFramework_procFrame)>();
+		});
+
+		batch.add("Mii::MiiEngine::createMiiFace", "F0 4F 2D E9 00 40 A0 E1 02 8B 2D ED 61 DF 4D E2 ? ? ? EB ? ? ? E5 00 00 90 E5", [this](memory::handle handle)
+		{
+			m_Mii_MiiEngine_createMiiFace = handle.as<decltype(m_Mii_MiiEngine_createMiiFace)>();
+		});
+
+		batch.add("Sequence::Menu_UpBarController::setTex", "00 C3 B0 E5 1C 00 80 E2 03 00 5C E3 0C 01 80 30 00 00 90 E5 00 C0 90 E5 01 00 5C E1", [this](memory::handle handle)
+		{
+			m_Sequence_Menu_UpBarController_setTex = handle.as<decltype(m_Sequence_Menu_UpBarController_setTex)>();
+		});
+
+		batch.add("Sequence::BaseRacePage::initMapIcon", "F0 4F 2D E9 00 80 A0 E1 02 8B 2D ED 53 DF 4D E2 ? ? ? EB 00 60 A0 E1 ? ? ? E5", [this](memory::handle handle)
+		{
+			m_Sequence_BaseRacePage_initMapIcon = handle.as<decltype(m_Sequence_BaseRacePage_initMapIcon)>();
+		});
+		
+		batch.add("Course Vote List Set Texture", "F8 40 2D E9 00 50 A0 E1 09 00 51 E3 01 00 A0 E1 0A 00 50 13 02 40 A0 E1 04 00 00 0A 00 00 8D E5", [this](memory::handle handle)
+		{
+			m_CourseVoteListSetTexture = handle.as<decltype(m_CourseVoteListSetTexture)>();
+		});
+
 		batch.run(memory::ranges::c_text);
+		
+		m_ctrpf_main_thread_tls = CTRPluginFramework::Process::GetMainThreadTLS();
+		m_ctrpf_hid_settings = (m_ctrpf_main_thread_tls - 0x2E000);
 
 		g_pointers = this;
 	}

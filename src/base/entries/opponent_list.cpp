@@ -1,7 +1,5 @@
 #include <base/entries.hpp>
 
-#include <CTRPluginFramework.hpp>
-
 using namespace CTRPluginFramework;
 
 namespace base
