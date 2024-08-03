@@ -31,6 +31,9 @@ namespace base
 
         CTRPluginFramework::MenuEntry *m_game_session_entry;
         CTRPluginFramework::MenuEntry *m_opponent_list_entry;
+        CTRPluginFramework::MenuEntry *m_render_optimizations_entry;
+        CTRPluginFramework::MenuEntry *m_load_rankboard_in_spectate_entry;
+        CTRPluginFramework::MenuEntry *m_show_mii_heads_entry;
     };
 
     inline menu *g_menu{};

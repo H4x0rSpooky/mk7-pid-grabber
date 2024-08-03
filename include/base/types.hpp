@@ -15,11 +15,11 @@ namespace nn::nex
 {
     struct StationInfo
     {
-        u32 magic; // always 1
-        u32 unkn0; // always 0
+        u32 magic;
+        u32 unkn0;
         u32 station_id;
-        u32 index; // station id but with 0xC000000
-        u32 unkn1; // random
+        u32 index;
+        u32 unkn1;
     };
     static_assert(sizeof(StationInfo) == 0x14);
 
@@ -27,7 +27,7 @@ namespace nn::nex
     {
         StationInfo *station_info;
         u32 player_id;
-        u32 index; // same as the player id
+        u32 index;
     };
     static_assert(sizeof(StationListEntry) == 0xC);
 
@@ -39,9 +39,9 @@ namespace nn::nex
     struct Station
     {
         u8 gap0[0x58];
-        u32 station_id; // 0x58
+        u32 station_id;
         u8 gap1[0x30];
-        u32 station_url; // + 0x80 + 0xC
+        u32 station_url;
     };
     static_assert(sizeof(Station) == 0x90);
 }
@@ -119,5 +119,11 @@ struct PlayerInfo
 {
     u32 id;
     bool loaded;
+    OpponentInfo info;
+};
+
+struct PlayerLog
+{
+    u8 player_slot;
     OpponentInfo info;
 };

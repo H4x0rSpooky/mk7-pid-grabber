@@ -24,6 +24,15 @@ namespace base
 		u32 *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
 		u32 *m_Sequence_RacePage_initControl_WiFiVS;
 		u32 *m_Sequence_RacePage_initControl_WiFiBattle;
+		u32 *m_System_ProjectGameFramework_procDraw;
+		u32 *m_System_ProjectGameFramework_procFrame;
+		u32 *m_Mii_MiiEngine_createMiiFace;
+		u32 *m_Sequence_Menu_UpBarController_setTex;
+		u32 *m_Sequence_BaseRacePage_initMapIcon;
+		u32 *m_CourseVoteListSetTexture; // unknown symbol
+
+		u32 m_ctrpf_main_thread_tls;
+		u32 m_ctrpf_hid_settings;
 	};
 
 	inline pointers *g_pointers{};
