@@ -78,6 +78,11 @@ namespace base
 			m_CourseVoteListSetTexture = handle.as<decltype(m_CourseVoteListSetTexture)>();
 		});
 
+		batch.add("Sequence::MenuWiFi_Confirm::onPageEnter", "F0 4F 2D E9 00 50 A0 E1 94 D0 4D E2 ? ? ? E5 10 00 94 E5 1E 0E 80 E2", [this](memory::handle handle)
+		{
+			m_Sequence_MenuWiFi_Confirm_onPageEnter = handle.as<decltype(m_Sequence_MenuWiFi_Confirm_onPageEnter)>();
+		});
+
 		batch.run(memory::ranges::c_text);
 		
 		m_ctrpf_main_thread_tls = CTRPluginFramework::Process::GetMainThreadTLS();

@@ -8,7 +8,8 @@ namespace base
 	:
 		m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData_hook("Net::NetworkPlayerDataManager::createPlayerDataFromSystemData", g_pointers->m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData, reinterpret_cast<void *>(&hooks::Net_NetworkPlayerDataManager_createPlayerDataFromSystemData)),
 		m_Sequence_RacePage_initControl_WiFiVS_hook("Sequence::RacePage::initControl_WiFiVS", g_pointers->m_Sequence_RacePage_initControl_WiFiVS, reinterpret_cast<void *>(&hooks::Sequence_RacePage_initControl_WiFiVS)),
-		m_Sequence_RacePage_initControl_WiFiBattle_hook("Sequence::RacePage::initControl_WiFiVS", g_pointers->m_Sequence_RacePage_initControl_WiFiBattle, reinterpret_cast<void *>(&hooks::Sequence_RacePage_initControl_WiFiBattle))
+		m_Sequence_RacePage_initControl_WiFiBattle_hook("Sequence::RacePage::initControl_WiFiVS", g_pointers->m_Sequence_RacePage_initControl_WiFiBattle, reinterpret_cast<void *>(&hooks::Sequence_RacePage_initControl_WiFiBattle)),
+		m_Sequence_MenuWiFi_Confirm_onPageEnter_hook("Sequence::MenuWiFi_Confirm::onPageEnter", g_pointers->m_Sequence_MenuWiFi_Confirm_onPageEnter, reinterpret_cast<void *>(&hooks::Sequence_MenuWiFi_Confirm_onPageEnter))
 	{
 		g_hooking = this;
 	}
@@ -26,6 +27,7 @@ namespace base
 		m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData_hook.enable();
 		m_Sequence_RacePage_initControl_WiFiVS_hook.enable();
 		m_Sequence_RacePage_initControl_WiFiBattle_hook.enable();
+		m_Sequence_MenuWiFi_Confirm_onPageEnter_hook.enable();
 
 		m_enabled = true;
 	}
@@ -35,6 +37,7 @@ namespace base
 		m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData_hook.disable();
 		m_Sequence_RacePage_initControl_WiFiVS_hook.disable();
 		m_Sequence_RacePage_initControl_WiFiBattle_hook.disable();
+		m_Sequence_MenuWiFi_Confirm_onPageEnter_hook.disable();
 
 		m_enabled = false;
 	}

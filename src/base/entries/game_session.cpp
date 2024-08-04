@@ -32,7 +32,14 @@ namespace base
                 for (const PlayerInfo &i : list)
                     items.push_back(i.info.name);
                 
-                Keyboard keyboard(Color::Turquoise << "Select a player" << Color::White << " | " << utilities::format_output("Current Amount", Utils::Format("%d", ((*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount - 1)), false), items);
+                std::string keyboard_message = "";
+
+                keyboard_message += Color::Turquoise << "Select a player\n\n";
+                keyboard_message += utilities::format_output("Session ID", Utils::Format("%d", (*g_pointers->m_network_engine)->session_net_z->room_id), true);
+                keyboard_message += utilities::format_output("Player Amount", Utils::Format("%d", ((*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount - 1)), true);
+                keyboard_message += utilities::format_output("Room Host", list[0].info.name, true);
+
+                Keyboard keyboard(keyboard_message, items);
                 keyboard.CanAbort(true);
                 
                 int option = keyboard.Open();

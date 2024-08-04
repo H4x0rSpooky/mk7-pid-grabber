@@ -8,13 +8,11 @@ namespace base
 
 	files::files()
 	{
-        auto logger_path = "session.log";
+        auto logger_path = "mk7_session.log";
             
         if (File::Open(m_logger, logger_path, File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
         
-        m_logger.Clear();
-
         auto settings_path = "settings.json";
         
         if (File::Open(m_settings, settings_path, File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)

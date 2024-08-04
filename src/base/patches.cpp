@@ -20,15 +20,15 @@ namespace base
 
     patches::~patches()
     {
-        m_disable_right_eye_rendering.~patch();
-        m_uncap_bottom_screen_frames.~patch();
-        m_disable_3d_slider_effect.~patch();
+        m_disable_right_eye_rendering.disable();
+        m_uncap_bottom_screen_frames.disable();
+        m_disable_3d_slider_effect.disable();
 
-        m_render_mii_face_0.~patch();
-        m_render_mii_face_1.~patch();
-        m_mii_face_on_votes_0.~patch();
-        m_mii_face_on_votes_1.~patch();
-        m_mii_face_on_minimap.~patch();
+        m_render_mii_face_0.disable();
+        m_render_mii_face_1.disable();
+        m_mii_face_on_votes_0.disable();
+        m_mii_face_on_votes_1.disable();
+        m_mii_face_on_minimap.disable();
 
         g_patches = nullptr;
     }
