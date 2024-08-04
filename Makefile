@@ -11,6 +11,7 @@ CTRPFLIB	?=	$(DEVKITPRO)/libctrpf
 
 NAME		:=	mk7-pid-grabber
 ABOUT		:=	$(NAME) is a CTRPluginFramework for Mario Kart 7.
+GITHUB		:=	https://github.com/H4x0rSpooky/mk7-pid-grabber
 
 TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	ctrpf.plgInfo
@@ -37,7 +38,7 @@ SOURCES 	:= 	src \
 #---------------------------------------------------------------------------------
 ARCH		:= -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-DEFINES 	:= -D__3DS__ -DNNSDK -DNAME="\"$(NAME)\"" -DABOUT="\"$(ABOUT)\""
+DEFINES 	:= -D__3DS__ -DNNSDK -DNAME="\"$(NAME)\"" -DABOUT="\"$(ABOUT)\"" -DGITHUB="\"$(GITHUB)\""
 
 CFLAGS		:= $(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-psabi
 CFLAGS		+= $(INCLUDE) $(DEFINES)
