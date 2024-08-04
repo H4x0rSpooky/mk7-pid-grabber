@@ -48,6 +48,13 @@ namespace nn::nex
 
 namespace Net
 {
+    struct SessionNetZ
+    {
+        u8 gap0[0x44];
+        u32 room_id;
+    };
+    static_assert(sizeof(SessionNetZ) == 0x48);
+
     struct NetworkPlayerData
     {
         u8 gap0[0x30];
@@ -79,11 +86,13 @@ namespace Net
 
     struct NetworkEngine
     {
-        u8 gap0[0x25C];
+        u8 gap0[0x13C];
+        SessionNetZ *session_net_z;
+        u8 gap1[0x11C];
         StationBufferManager *station_buffer_mgr;
-        u8 gap1[8];
+        u8 gap2[8];
         u32 local_player_id;
-        u8 gap2[0x4C];
+        u8 gap3[0x4C];
         NetworkPlayerDataManager *network_player_data_mgr;
     };
     static_assert(sizeof(NetworkEngine) == 0x2BC);
@@ -94,13 +103,6 @@ struct SelectionIteratorTemplate
     u32 *iterator[3];
     u32 station;
     u32 available;
-};
-
-struct StationTemplate
-{
-    u32 target_station_id;
-    nn::nex::Station station;
-    bool valid;
 };
 
 struct OpponentList

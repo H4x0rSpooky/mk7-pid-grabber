@@ -9,5 +9,6 @@ namespace base
 	{
 		static void clean_principal_id(Net::NetworkPlayerData *, u8);
 		static void spectator_rankboard(u32);
+		static void session_logger();
 	};
 }

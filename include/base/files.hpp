@@ -11,10 +11,10 @@ namespace base
 		~files();
 
 		static void set_working_directory();
-
 	private:
 		friend class logger;
 		friend class settings;
+		friend struct features;
 		
 		CTRPluginFramework::File m_logger;
 		CTRPluginFramework::File m_settings;

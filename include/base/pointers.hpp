@@ -21,15 +21,16 @@ namespace base
 		InitRankboard_t init_rankBoard;
 
         Net::NetworkEngine **m_network_engine;
-		u32 *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
-		u32 *m_Sequence_RacePage_initControl_WiFiVS;
-		u32 *m_Sequence_RacePage_initControl_WiFiBattle;
-		u32 *m_System_ProjectGameFramework_procDraw;
-		u32 *m_System_ProjectGameFramework_procFrame;
-		u32 *m_Mii_MiiEngine_createMiiFace;
-		u32 *m_Sequence_Menu_UpBarController_setTex;
-		u32 *m_Sequence_BaseRacePage_initMapIcon;
-		u32 *m_CourseVoteListSetTexture; // unknown symbol
+		void *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
+		void *m_Sequence_RacePage_initControl_WiFiVS;
+		void *m_Sequence_RacePage_initControl_WiFiBattle;
+		void *m_System_ProjectGameFramework_procDraw;
+		void *m_System_ProjectGameFramework_procFrame;
+		void *m_Mii_MiiEngine_createMiiFace;
+		void *m_Sequence_Menu_UpBarController_setTex;
+		void *m_Sequence_BaseRacePage_initMapIcon;
+		void *m_CourseVoteListSetTexture; // unknown symbol
+		void *m_Sequence_MenuWiFi_Confirm_onPageEnter;
 
 		u32 m_ctrpf_main_thread_tls;
 		u32 m_ctrpf_hid_settings;
