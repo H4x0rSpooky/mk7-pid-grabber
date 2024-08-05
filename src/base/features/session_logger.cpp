@@ -15,7 +15,6 @@ namespace base
         g_files->m_logger.Clear();
 
         auto const network_engine = (*g_pointers->m_network_engine);
-        u32 player_amount = network_engine->station_buffer_mgr->peer_amount;
 
         std::string session = "";
 
@@ -23,9 +22,9 @@ namespace base
 
         session += std::format("\n\nDate Time: {}\nSession ID: {:d}", g_logger.get_current_date_time_string(true), network_engine->session_net_z->room_id);
         
-        session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", player_amount, network_engine->local_player_id);
-        
-        for (size_t i = 0; i < player_amount; i++)
+        session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), network_engine->local_player_id);
+
+        for (size_t i = 0; i < utilities::get_player_amount(true); i++)
         {
             if (i == network_engine->local_player_id)
                 continue;
@@ -34,7 +33,12 @@ namespace base
 
             auto slot = (i == 0 ? "0 (Host)" : std::to_string(i));
 
-            session += std::format("\nPlayer: {} - Slot: {} - PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, player_data->principal_id, player_data->principal_id);
+            u32 principal_id = utilities::get_principal_id(i);
+
+            if (player_data->principal_id != principal_id)
+                session += std::format("\nPlayer: {} - Slot: {} - Real PID: {:d} (0x{:X}) - Spoofed PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, principal_id, principal_id, player_data->principal_id, player_data->principal_id);
+            else
+                session += std::format("\nPlayer: {} - Slot: {} - PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, principal_id, principal_id);
         }
 
         g_logger.info("{}", session);

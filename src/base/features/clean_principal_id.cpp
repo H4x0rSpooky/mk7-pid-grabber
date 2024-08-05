@@ -4,14 +4,21 @@
 
 namespace base
 {
-    void features::clean_principal_id(Net::NetworkPlayerData *player_data, u8 player_id)
+    void features::clean_principal_id()
     {
-        if ((*g_pointers->m_network_engine)->local_player_id == player_id)
-            return;
+        auto network_engine = (*g_pointers->m_network_engine);
+        
+        for (size_t i = 0; i < utilities::get_player_amount(true); i++)
+        {
+            if (network_engine->local_player_id == i)
+                continue;
+            
+            auto player_data = utilities::get_network_player_data(i);
+            
+            u32 clean_pid = utilities::get_principal_id(i);
 
-        u32 clean_pid = utilities::get_principal_id(player_id);
-
-        if (player_data->principal_id != clean_pid)
-            player_data->principal_id = clean_pid;
+            if (player_data->principal_id != clean_pid)
+                player_data->principal_id = clean_pid;
+        }
     }
 }

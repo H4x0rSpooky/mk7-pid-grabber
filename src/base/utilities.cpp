@@ -81,7 +81,12 @@ namespace base
 
     u32 utilities::get_principal_id(u8 player_id)
     {
-        auto station = utilities::get_station(utilities::get_station_id(player_id));
+        auto station_id = utilities::get_station_id(player_id);
+
+        if (!station_id)
+            return {};
+
+        auto station = utilities::get_station(station_id);
 
         if (station->station_url)
         {
@@ -101,5 +106,12 @@ namespace base
         }
         
         return {};
+    }
+
+    u32 utilities::get_player_amount(bool align)
+    {
+        u32 amount = (*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount;
+
+        return (align ? (amount - 1) : amount);
     }
 }

@@ -9,5 +9,7 @@ namespace base
         g_hooking->m_Sequence_MenuWiFi_Confirm_onPageEnter_hook.call_original<void>(_this);
 
         features::session_logger();
+
+        features::clean_principal_id();
     }
 }
