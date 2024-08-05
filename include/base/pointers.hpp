@@ -7,6 +7,8 @@ using StationSelectionIteratorTemplate_t = void (*)(u32 **);
 using IteratorOverDOsAdvanceToValidItem_t = void (*)(u32 **, bool);
 using InitRankboard_t = void (*)(u32);
 
+#define CTRPF_hid_settings 0x1FF81000
+
 namespace base
 {
 	class pointers
@@ -31,9 +33,6 @@ namespace base
 		void *m_Sequence_BaseRacePage_initMapIcon;
 		void *m_CourseVoteListSetTexture; // unknown symbol
 		void *m_Sequence_MenuWiFi_Confirm_onPageEnter;
-
-		u32 m_ctrpf_main_thread_tls;
-		u32 m_ctrpf_hid_settings;
 	};
 
 	inline pointers *g_pointers{};

@@ -16,6 +16,7 @@ namespace base
 
         memory::patch m_render_mii_face_0;
         memory::patch m_render_mii_face_1;
+        memory::patch m_render_mii_face_2;
         memory::patch m_mii_face_on_votes_0;
         memory::patch m_mii_face_on_votes_1;
         memory::patch m_mii_face_on_minimap;
