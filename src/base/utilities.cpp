@@ -108,10 +108,8 @@ namespace base
         return {};
     }
 
-    u32 utilities::get_player_amount(bool align)
+    u32 utilities::get_player_amount()
     {
-        u32 amount = (*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount;
-
-        return (align ? (amount - 1) : amount);
+        return (*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount;
     }
 }

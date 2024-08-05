@@ -8,11 +8,11 @@ namespace base
 {
     void entries::game_session(MenuEntry *entry)
     {
-        if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount(false) > 1)
+        if ((*g_pointers->m_network_engine)->local_player_id != UINT32_MAX && utilities::get_player_amount() > 1)
         {
             std::vector<PlayerInfo> list;
 
-            for (size_t i = 0; i < utilities::get_player_amount(true); i++)
+            for (size_t i = 0; i < utilities::get_player_amount(); i++)
             {
                 if ((*g_pointers->m_network_engine)->local_player_id == i)
                     continue;
@@ -35,7 +35,7 @@ namespace base
 
                 keyboard_message += Color::Turquoise << "Select a player\n\n";
                 keyboard_message += utilities::format_output("Session ID", Utils::Format("%d", (*g_pointers->m_network_engine)->session_net_z->room_id), true);
-                keyboard_message += utilities::format_output("Player Amount", Utils::Format("%d", utilities::get_player_amount(false)), true);
+                keyboard_message += utilities::format_output("Player Amount", Utils::Format("%d", utilities::get_player_amount()), true);
                 keyboard_message += utilities::format_output("Room Host", list[0].info.name, true);
 
                 Keyboard keyboard(keyboard_message, items);

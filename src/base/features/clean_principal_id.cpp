@@ -8,7 +8,7 @@ namespace base
     {
         auto network_engine = (*g_pointers->m_network_engine);
         
-        for (size_t i = 0; i < utilities::get_player_amount(true); i++)
+        for (size_t i = 0; i < utilities::get_player_amount(); i++)
         {
             if (network_engine->local_player_id == i)
                 continue;
