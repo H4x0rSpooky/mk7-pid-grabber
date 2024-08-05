@@ -28,7 +28,7 @@ namespace base
             for (const OpponentInfo &i : list)
                 items.push_back(i.name);
             
-            Keyboard keyboard(Color::Turquoise << "Select a player" << Color::White << " | " << utilities::format_output("Current Amount", Utils::Format("%d", list.size()), false), items);
+            Keyboard keyboard(Color::Turquoise << "Select a player" << Color::White << " | " << utilities::format_output("Opponent Amount", Utils::Format("%d", list.size()), false), items);
             keyboard.CanAbort(true);
             
             int option = keyboard.Open();

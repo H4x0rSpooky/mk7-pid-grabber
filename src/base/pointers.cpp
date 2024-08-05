@@ -58,9 +58,9 @@ namespace base
 			m_System_ProjectGameFramework_procFrame = handle.sub(0x14).as<decltype(m_System_ProjectGameFramework_procFrame)>();
 		});
 
-		batch.add("Mii::MiiEngine::createMiiFace", "F0 4F 2D E9 00 40 A0 E1 02 8B 2D ED 61 DF 4D E2 ? ? ? EB ? ? ? E5 00 00 90 E5", [this](memory::handle handle)
+		batch.add("Mii::MiiEngine::createMiiFace", "00 20 A0 E1 ? ? ? E2 00 50 A0 E3 58 30 8D E5 5C 00 8D E5 58 10 8D E2 00 30 E0 E3", [this](memory::handle handle)
 		{
-			m_Mii_MiiEngine_createMiiFace = handle.as<decltype(m_Mii_MiiEngine_createMiiFace)>();
+			m_Mii_MiiEngine_createMiiFace = handle.sub(0x24).as<decltype(m_Mii_MiiEngine_createMiiFace)>();
 		});
 
 		batch.add("Sequence::Menu_UpBarController::setTex", "00 C3 B0 E5 1C 00 80 E2 03 00 5C E3 0C 01 80 30 00 00 90 E5 00 C0 90 E5 01 00 5C E1", [this](memory::handle handle)
@@ -68,9 +68,9 @@ namespace base
 			m_Sequence_Menu_UpBarController_setTex = handle.as<decltype(m_Sequence_Menu_UpBarController_setTex)>();
 		});
 
-		batch.add("Sequence::BaseRacePage::initMapIcon", "F0 4F 2D E9 00 80 A0 E1 02 8B 2D ED 53 DF 4D E2 ? ? ? EB 00 60 A0 E1 ? ? ? E5", [this](memory::handle handle)
+		batch.add("Sequence::BaseRacePage::initMapIcon", "4C 16 90 E5 00 00 91 E5 10 30 90 E5 4D 0F 8D E2 33 FF 2F E1 03 0A 88 E2 4D 1F 8D E2", [this](memory::handle handle)
 		{
-			m_Sequence_BaseRacePage_initMapIcon = handle.as<decltype(m_Sequence_BaseRacePage_initMapIcon)>();
+			m_Sequence_BaseRacePage_initMapIcon = handle.sub(0x4C).as<decltype(m_Sequence_BaseRacePage_initMapIcon)>();
 		});
 		
 		batch.add("Course Vote List Set Texture", "F8 40 2D E9 00 50 A0 E1 09 00 51 E3 01 00 A0 E1 0A 00 50 13 02 40 A0 E1 04 00 00 0A 00 00 8D E5", [this](memory::handle handle)
@@ -82,11 +82,8 @@ namespace base
 		{
 			m_Sequence_MenuWiFi_Confirm_onPageEnter = handle.as<decltype(m_Sequence_MenuWiFi_Confirm_onPageEnter)>();
 		});
-
-		batch.run(memory::ranges::c_text);
 		
-		m_ctrpf_main_thread_tls = CTRPluginFramework::Process::GetMainThreadTLS();
-		m_ctrpf_hid_settings = (m_ctrpf_main_thread_tls - 0x2E000);
+		batch.run(memory::ranges::c_text);
 
 		g_pointers = this;
 	}

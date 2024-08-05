@@ -30,6 +30,8 @@ namespace CTRPluginFramework
         auto rainbow_service_instance = std::make_unique<rainbow_service>();
         
         g_hooking->enable();
+
+        Sleep(Seconds(5));
         
         g_menu->run();
 
@@ -57,7 +59,7 @@ namespace CTRPluginFramework
         settings.ThreadPriority = 0x3E;
         settings.WaitTimeToBoot = Time::Zero;
 
-        settings.CachedDrawMode = false;
+        settings.CachedDrawMode = true;
         settings.TryLoadSDSounds = false;
 		settings.AllowActionReplay = false;
 		settings.AllowSearchEngine = false;
