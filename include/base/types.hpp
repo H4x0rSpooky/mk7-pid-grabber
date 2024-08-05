@@ -79,10 +79,10 @@ namespace Net
     {
         u8 gap0[0x80];
         nn::nex::StationList *racers;
-        u8 gap1[0x50];
+        u8 gap1[0x4C];
         u32 peer_amount;
     };
-    static_assert(sizeof(StationBufferManager) == 0xD8);
+    static_assert(sizeof(StationBufferManager) == 0xD4);
 
     struct NetworkEngine
     {

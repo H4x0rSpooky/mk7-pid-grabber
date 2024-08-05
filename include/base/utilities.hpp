@@ -18,6 +18,6 @@ namespace base
         static nn::nex::Station * get_station(u32);
         static u32 get_station_id(u8);
         static u32 get_principal_id(u8);
-        static u32 get_player_amount(bool);
+        static u32 get_player_amount();
     };
 }
