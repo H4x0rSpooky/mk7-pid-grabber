@@ -47,4 +47,3 @@ Just direct message me on Discord.
 - H4x0rSpooky for creating this project
 - [Anto726](https://github.com/Anto726) for the [CTRPluginFramework-RevolutionBase](https://github.com/Anto726/CTRPluginFramework-RevolutionBase)
 - [Nanquitas](https://github.com/Nanquitas) for creating the CTRPluginFramework
-- [PabloMK7](https://github.com/PabloMK7) for maintaining the CTRPluginFramework
