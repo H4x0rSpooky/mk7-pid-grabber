@@ -70,11 +70,7 @@ namespace base
                             MessageBox(Color::DodgerBlue << player.info.name, message_box, DialogType::DialogOk, ClearScreen::Both)();
                         }
                         else
-                        {
                             utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Reading the target", true);
-
-                            return;
-                        }
                     }
                     else
                         utilities::print_error(Color::DodgerBlue << player.info.name << Color::White << " is unavailable", false);

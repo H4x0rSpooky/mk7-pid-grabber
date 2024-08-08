@@ -42,11 +42,7 @@ namespace base
                         session += std::format("\nPlayer: {} - Slot: {} - PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, player_data->principal_id, player_data->principal_id);
                 }
                 else
-                {
                     utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Logging the session", true);
-
-                    return;
-                }
             }
 
             g_files->m_logger.Clear();

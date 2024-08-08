@@ -23,11 +23,7 @@ namespace base
                     player_data->principal_id = clean_pid;
             }
             else
-            {
                 utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Cleaning the PID", true);
-
-                return;
-            }
         }
     }
 }

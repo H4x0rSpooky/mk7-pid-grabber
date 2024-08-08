@@ -23,6 +23,13 @@ namespace base
             error += Color::Red << "\n\nInform " << CREATOR << " about it";
 
         MessageBox(Color::Orange << "An error occurred", error, DialogType::DialogOk, ClearScreen::Both)();
+
+        if (report)
+        {
+            Sleep(Seconds(1));
+
+            Process::ReturnToHomeMenu();
+        }
     }
 
     std::string utilities::format_output(std::string name, std::string value, bool linebreak)
