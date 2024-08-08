@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <format>
 
 #define DEFAULT_NAME "Player"
 #define GUEST_NAME "no name"
@@ -18,7 +19,7 @@ namespace nn::nex
         u32 magic;
         u32 unkn0;
         u32 station_id;
-        u32 index;
+        u32 padded_station_id; // 0x00C0XXXX padded, used as the station's station id
         u32 unkn1;
     };
     static_assert(sizeof(StationInfo) == 0x14);
@@ -40,8 +41,10 @@ namespace nn::nex
     {
         u8 gap0[0x58];
         u32 station_id;
+        u8 gap1[0x30];
+        u32 station_url;
     };
-    static_assert(sizeof(Station) == 0x5C);
+    static_assert(sizeof(Station) == 0x90);
 }
 
 namespace Net

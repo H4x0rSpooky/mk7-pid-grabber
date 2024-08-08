@@ -7,8 +7,8 @@ namespace base
 {
 	struct features
 	{
-		static void clean_principal_id();
 		static void spectator_rankboard(u32);
-		static void print_session();
+		static void clean_principal_id(std::vector<nn::nex::Station *>);
+		static void print_session(std::vector<nn::nex::Station *>);
 	};
 }

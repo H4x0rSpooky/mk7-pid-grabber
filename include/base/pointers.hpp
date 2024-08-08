@@ -6,9 +6,8 @@ using GetNetworkPlayerData_t = Net::NetworkPlayerData * (*)(Net::NetworkPlayerDa
 using StationSelectionIteratorTemplate_t = void (*)(u32 **);
 using IteratorOverDOsAdvanceToValidItem_t = void (*)(u32 **, bool);
 using InitRankboard_t = void (*)(u32);
-using GetStationURL_t = u32 (*)(nn::nex::Station *, u8);
 
-#define CTRPF_hid_settings 0x1FF81000
+#define CTRPF_3D_Slider_Settings 0x1FF81000
 
 namespace base
 {
@@ -22,7 +21,6 @@ namespace base
         StationSelectionIteratorTemplate_t station_selection_iterator_template;
         IteratorOverDOsAdvanceToValidItem_t iterator_over_DOs_advance_to_valid_item;
 		InitRankboard_t init_rankBoard;
-		GetStationURL_t get_station_url;
 
         Net::NetworkEngine **m_network_engine;
 		void *m_Net_NetworkPlayerDataManager_createPlayerDataFromSystemData;
