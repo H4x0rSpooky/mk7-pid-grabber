@@ -19,7 +19,7 @@
 #define GAME_SESSION_NOTE Color::SkyBlue << "This fetches the current players inside an active game session or current lobby.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define OPPONENT_LIST_NOTE Color::SkyBlue << "This fetches only the opponent list from your save data, excluding the friend list.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define RENDER_OPTIMIZATIONS_NOTE Color::SkyBlue << "This entry disables the 3D and uncaps the FPS on the bottom screen during races."
-#define SESSION_LOGGER_NOTE Color::SkyBlue << "This entry creates a detailed dump of the latest game session you played in.\n\n" << Color::DodgerBlue << "SD:luma\\plugins\\00040000" << Utils::ToHex(Process::GetTitleID()) << "\\" << NAME << "\\" << g_files->m_logger.GetName()
+#define SESSION_LOGGER_NOTE Color::SkyBlue << "This entry creates a detailed dump of the latest game session you played in.\n\n" << Color::DodgerBlue << "sd:\\luma\\plugins\\00040000" << Utils::ToHex(Process::GetTitleID()) << "\\" << NAME << "\\" << g_files->m_logger.GetName()
 
 namespace base
 {
@@ -41,12 +41,7 @@ namespace base
 
         auto settings = FwkSettings::Get();
 
-#ifdef _DEBUG
-        m_plugin_menu->SetHexEditorState(true);
-
-        settings.AllowActionReplay = true;
-		settings.AllowSearchEngine = true;
-#else
+#ifndef _DEBUG
         m_plugin_menu->SetHexEditorState(false);
 
         settings.AllowActionReplay = false;
@@ -94,7 +89,7 @@ namespace base
     void menu::finalize()
     {
         m_load_rankboard_in_spectate_entry->Enable();
-        m_show_mii_heads_entry->Enable(); // the crash fix might cause issues
+        m_show_mii_heads_entry->Enable();
 
         if (g_settings.m_options.render_optimizations)
             m_render_optimizations_entry->Enable();
