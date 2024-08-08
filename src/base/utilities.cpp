@@ -88,30 +88,30 @@ namespace base
 
         return {};
     }
-
-    u32 utilities::get_station_id(u8 player_id)
+    
+    u32 utilities::get_station_id(u8 player_id, bool padding)
     {
         auto list = (*g_pointers->m_network_engine)->station_buffer_mgr->racers;
 
         if (player_id >= std::size(list->entries))
             return {};
         
-        return list->entries[player_id].station_info->station_id;
+        return (padding ? list->entries[player_id].station_info->padded_station_id : list->entries[player_id].station_info->station_id);
     }
 
     u32 utilities::get_principal_id(u8 player_id)
     {
-        if (auto station_id = utilities::get_station_id(player_id))
+        if (auto station_id = utilities::get_station_id(player_id, false))
         {
             if (auto station = utilities::get_station(station_id))
             {
-                if (auto station_url = g_pointers->get_station_url(station, 0))
+                if (station->station_url)
                 {
                     std::string str{};
 
-                    u32 length = *(u32 *)(station_url - 4);
+                    u32 length = *(u32 *)(station->station_url - 4);
 
-                    if (Process::ReadString(station_url, str, (length * sizeof(u32)), StringFormat::Utf16))
+                    if (Process::ReadString(station->station_url, str, (length * sizeof(u32)), StringFormat::Utf16))
                     {
                         std::string target = "PID";
 
@@ -156,5 +156,62 @@ namespace base
     bool utilities::is_local_client(u32 id, bool is_station)
     {
         return (id == (is_station ? (*g_pointers->m_network_engine)->local_station_id : (*g_pointers->m_network_engine)->local_player_id));
+    }
+
+    std::vector<nn::nex::Station *> utilities::get_station_list(std::vector<u32> id_list)
+    {
+        std::vector<nn::nex::Station *> list{};
+
+        static SelectionIteratorTemplate selector{};
+
+        g_pointers->station_selection_iterator_template(selector.iterator);
+        
+        while (selector.available)
+        {
+            auto station = reinterpret_cast<nn::nex::Station *>(selector.station);
+
+            if (std::find(id_list.begin(), id_list.end(), (station->station_id & 0x3FFFFF)) != id_list.end())
+            {
+                list.push_back(station);
+
+                if (list.size() == id_list.size())
+                    return list;
+            }
+            
+            g_pointers->iterator_over_DOs_advance_to_valid_item(selector.iterator, false);
+        }
+
+        return {};
+    }
+
+    nn::nex::Station * utilities::get_station_from_list(std::vector<nn::nex::Station *> list, u32 station_id)
+    {
+        for (auto station : list)
+            if (station->station_id == station_id)
+                return station;
+        
+        return {};
+    }
+
+    u32 utilities::get_principal_id(nn::nex::Station *station)
+    {
+       if (station && station->station_url)
+        {
+            std::string str{};
+
+            u32 length = *(u32 *)(station->station_url - 4);
+
+            if (Process::ReadString(station->station_url, str, (length * sizeof(u32)), StringFormat::Utf16))
+            {
+                std::string target = "PID";
+
+                size_t start = str.find(target + "=") + std::size(target + "=");
+                size_t end = str.find(";", start);
+                
+                return stoi(str.substr(start, end - start));
+            }
+        }
+        
+        return {};
     }
 }

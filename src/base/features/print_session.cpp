@@ -11,7 +11,7 @@ using namespace CTRPluginFramework;
 
 namespace base
 {
-    void features::print_session()
+    void features::print_session(std::vector<nn::nex::Station *> list)
     {
         if (g_menu->m_session_logger_entry->IsActivated())
         {
@@ -30,19 +30,27 @@ namespace base
                 if (utilities::is_local_client(i, false))
                     continue;
 
-                auto player_data = utilities::get_network_player_data(i);
+                auto station = utilities::get_station_from_list(list, utilities::get_station_id(i, true));
 
-                auto slot = (i == 0 ? "0 (Host)" : std::to_string(i));
+                if (!station)
+                     utilities::print_error("Could not fetch the Station\n\nOperation: Logging the Session", true);
+                
+                if (station->station_id != utilities::get_station_id(i, true))
+                    utilities::print_error("Could not match the Station ID\n\nOperation: Logging the Session", true);
 
-                if (auto clean_pid = utilities::get_principal_id(i))
+                if (auto clean_pid = utilities::get_principal_id(station))
                 {
+                    auto player_data = utilities::get_network_player_data(i);
+
+                    auto slot = (i == 0 ? "0 (Host)" : std::to_string(i));
+
                     if (player_data->principal_id != clean_pid)
                         session += std::format("\nPlayer: {} - Slot: {} - Real PID: {:d} (0x{:X}) - Spoofed PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, clean_pid, clean_pid, player_data->principal_id, player_data->principal_id);
                     else
                         session += std::format("\nPlayer: {} - Slot: {} - PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, player_data->principal_id, player_data->principal_id);
                 }
                 else
-                    utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Logging the session", true);
+                    utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Logging the Session", true);
             }
 
             g_files->m_logger.Clear();

@@ -94,7 +94,7 @@ namespace base
     void menu::finalize()
     {
         m_load_rankboard_in_spectate_entry->Enable();
-        m_show_mii_heads_entry->Enable();
+        m_show_mii_heads_entry->Enable(); // the crash fix might cause issues
 
         if (g_settings.m_options.render_optimizations)
             m_render_optimizations_entry->Enable();
