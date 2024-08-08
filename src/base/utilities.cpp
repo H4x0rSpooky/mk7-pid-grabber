@@ -16,14 +16,13 @@ namespace base
 
         return (process_name == current_process);
     }
-
-    std::string utilities::parse_name(Net::NetworkPlayerData *player_data)
+    
+    void utilities::print_error(std::string error, bool report)
     {
-        std::string name{};
+        if (report)
+            error += Color::Red << "\n\nInform " << CREATOR << " about it";
 
-        Process::ReadString((u32)player_data->name, name, std::size(player_data->name) + 1, StringFormat::Utf16);
-        
-        return ((name.empty() || name == GUEST_NAME) ? DEFAULT_NAME : name);
+        MessageBox(Color::Orange << "An error occurred", error, DialogType::DialogOk, ClearScreen::Both)();
     }
 
     std::string utilities::format_output(std::string name, std::string value, bool linebreak)
@@ -52,6 +51,15 @@ namespace base
         return {};
     }
 
+    std::string utilities::parse_name(Net::NetworkPlayerData *player_data)
+    {
+        std::string name{};
+
+        Process::ReadString((u32)player_data->name, name, std::size(player_data->name) + 1, StringFormat::Utf16);
+        
+        return ((name.empty() || name == GUEST_NAME) ? DEFAULT_NAME : name);
+    }
+
     Net::NetworkPlayerData * utilities::get_network_player_data(u8 player_id)
     {
         return g_pointers->get_network_player_data((*g_pointers->m_network_engine)->network_player_data_mgr, player_id);
@@ -76,40 +84,70 @@ namespace base
 
     u32 utilities::get_station_id(u8 player_id)
     {
-        return (*g_pointers->m_network_engine)->station_buffer_mgr->racers->entries[player_id].station_info->station_id;
+        auto list = (*g_pointers->m_network_engine)->station_buffer_mgr->racers;
+
+        if (player_id >= std::size(list->entries))
+            return {};
+        
+        return list->entries[player_id].station_info->station_id;
     }
 
     u32 utilities::get_principal_id(u8 player_id)
     {
-        auto station_id = utilities::get_station_id(player_id);
-
-        if (!station_id)
-            return {};
-
-        auto station = utilities::get_station(station_id);
-
-        if (station->station_url)
+        if (auto station_id = utilities::get_station_id(player_id))
         {
-            std::string str{};
-
-            u32 length = *(u32 *)(station->station_url - 4);
-
-            if (Process::ReadString(station->station_url, str, (length * 4), StringFormat::Utf16))
+            if (auto station = utilities::get_station(station_id))
             {
-                std::string target = "PID";
+                if (auto station_url = g_pointers->get_station_url(station, 0))
+                {
+                    std::string str{};
 
-                size_t start = str.find(target + "=") + std::size(target + "=");
-                size_t end = str.find(";", start);
-                
-                return stoi(str.substr(start, end - start));
+                    u32 length = *(u32 *)(station_url - 4);
+
+                    if (Process::ReadString(station_url, str, (length * sizeof(u32)), StringFormat::Utf16))
+                    {
+                        std::string target = "PID";
+
+                        size_t start = str.find(target + "=") + std::size(target + "=");
+                        size_t end = str.find(";", start);
+                        
+                        return stoi(str.substr(start, end - start));
+                    }
+                }
             }
         }
         
         return {};
     }
 
-    u32 utilities::get_player_amount()
+    u32 utilities::get_my_principal_id()
     {
-        return (*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount;
+        if (R_SUCCEEDED(frdInit()))
+        {
+            FriendKey key;
+
+            if (R_SUCCEEDED(FRD_GetMyFriendKey(&key)))
+            {
+                frdExit();
+
+                return key.principalId;
+            }
+            
+            frdExit();
+        }
+
+        return {};
+    }
+
+    u32 utilities::get_player_amount(bool exclude_local_client)
+    {
+        u32 amount = (*g_pointers->m_network_engine)->station_buffer_mgr->peer_amount;
+
+        return (exclude_local_client ? (amount - 1): amount);
+    }
+
+    bool utilities::is_local_client(u32 id, bool is_station)
+    {
+        return (id == (is_station ? (*g_pointers->m_network_engine)->local_station_id : (*g_pointers->m_network_engine)->local_player_id));
     }
 }

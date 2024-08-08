@@ -61,9 +61,6 @@ namespace CTRPluginFramework
 
         settings.CachedDrawMode = true;
         settings.TryLoadSDSounds = false;
-		settings.AllowActionReplay = false;
-		settings.AllowSearchEngine = false;
-
         settings.UseGameHidMemory = true;
 
         settings.SetThemeDefault();

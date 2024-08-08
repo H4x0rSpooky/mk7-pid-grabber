@@ -82,7 +82,12 @@ namespace base
 		{
 			m_Sequence_MenuWiFi_Confirm_onPageEnter = handle.as<decltype(m_Sequence_MenuWiFi_Confirm_onPageEnter)>();
 		});
-		
+
+		batch.add("nn::nex::Station::GetStationURL", "80 00 80 E2 00 00 A0 E1 00 20 A0 E1 05 00 51 E3", [this](memory::handle handle)
+		{
+			get_station_url = reinterpret_cast<decltype(get_station_url)>(handle.as<u32 *>());
+        });
+
 		batch.run(memory::ranges::c_text);
 
 		g_pointers = this;

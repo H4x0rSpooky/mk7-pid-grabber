@@ -9,15 +9,22 @@ include $(DEVKITARM)/3ds_rules
 
 CTRPFLIB	?=	$(DEVKITPRO)/libctrpf
 
-NAME		:=	mk7-pid-grabber
-ABOUT		:=	$(NAME) is a CTRPluginFramework for Mario Kart 7.
 GITHUB		:=	https://github.com/H4x0rSpooky/mk7-pid-grabber
+CREATOR		:=	H4x0rSpooky
+
+NAME		:=	mk7-pid-grabber
+ABOUT		:=	$(NAME) is a Principal ID grabbing tool for Mario Kart 7 created by $(CREATOR).\n\nGithub Repository: $(GITHUB)
+
+MAJOR		:=	1
+MINOR		:= 	0
+REV			:=	0
 
 TARGET		:= 	$(notdir $(CURDIR))
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
 DEBUG		:=	debug
+ASSETS		:= 	assets
 
 INCLUDES	:= 	include \
 				include/ctrpf \
@@ -36,9 +43,10 @@ SOURCES 	:= 	src \
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-ARCH		:= -march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
+ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-DEFINES 	:= -D__3DS__ -DNNSDK -DNAME="\"$(NAME)\"" -DABOUT="\"$(ABOUT)\"" -DGITHUB="\"$(GITHUB)\""
+DEFINES 	:=	-D__3DS__ -DNNSDK -DGITHUB="\"$(GITHUB)\"" -DCREATOR="\"$(CREATOR)\"" -DNAME="\"$(NAME)\"" \
+				-DABOUT="\"$(ABOUT)\"" -DMAJOR="\"$(MAJOR)\"" -DMINOR="\"$(MINOR)\"" -DREV="\"$(REV)\"" #-D_DEBUG
 
 CFLAGS		:= $(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-psabi
 CFLAGS		+= $(INCLUDE) $(DEFINES)
@@ -46,7 +54,7 @@ CFLAGS		+= $(INCLUDE) $(DEFINES)
 CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -std=gnu++23
 
 ASFLAGS		:= $(ARCH)
-LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
+LDFLAGS		:= -T $(TOPDIR)/$(ASSETS)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
 
 LIBS		:= -lctrpf -lctru
 LIBDIRS		:= $(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
@@ -118,7 +126,7 @@ $(OUTPUT).3gx : $(OFILES)
 %.3gx: %.elf
 #---------------------------------------------------------------------------------
 	@echo creating $(notdir $@)
-	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(PLGINFO) $@
+	@3gxtool -d -s $(word 1, $^) $(TOPDIR)/$(ASSETS)/$(PLGINFO) $@
 	@-mv $(TOPDIR)/$(BUILD)/*.lst $(TOPDIR)/$(DEBUG)/
 	@-mv $(TOPDIR)/*.elf $(TOPDIR)/$(DEBUG)/
 	@echo $(NAME).3gx successfully created!
