@@ -15,6 +15,7 @@ namespace base
 		struct options
 		{
 			bool render_optimizations{ false };
+			bool session_logger{ false };
 		}
 		m_options{};
 

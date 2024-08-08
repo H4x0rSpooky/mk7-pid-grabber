@@ -11,5 +11,6 @@ namespace base
 		static void opponent_list(CTRPluginFramework::MenuEntry *);
 		static void render_optimizations(CTRPluginFramework::MenuEntry *);
 		static void show_mii_heads(CTRPluginFramework::MenuEntry *);
+		static void session_logger(CTRPluginFramework::MenuEntry *);
 	};
 }

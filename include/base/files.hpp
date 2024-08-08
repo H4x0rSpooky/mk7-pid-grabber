@@ -14,6 +14,7 @@ namespace base
 	private:
 		friend class logger;
 		friend class settings;
+		friend class menu;
 		friend struct features;
 		
 		CTRPluginFramework::File m_logger;

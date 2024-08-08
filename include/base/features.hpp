@@ -9,6 +9,6 @@ namespace base
 	{
 		static void clean_principal_id();
 		static void spectator_rankboard(u32);
-		static void session_logger();
+		static void print_session();
 	};
 }

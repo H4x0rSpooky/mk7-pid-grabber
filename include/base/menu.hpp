@@ -34,6 +34,7 @@ namespace base
         CTRPluginFramework::MenuEntry *m_render_optimizations_entry;
         CTRPluginFramework::MenuEntry *m_load_rankboard_in_spectate_entry;
         CTRPluginFramework::MenuEntry *m_show_mii_heads_entry;
+        CTRPluginFramework::MenuEntry *m_session_logger_entry;
     };
 
     inline menu *g_menu{};

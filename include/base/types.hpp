@@ -40,10 +40,8 @@ namespace nn::nex
     {
         u8 gap0[0x58];
         u32 station_id;
-        u8 gap1[0x30];
-        u32 station_url;
     };
-    static_assert(sizeof(Station) == 0x90);
+    static_assert(sizeof(Station) == 0x5C);
 }
 
 namespace Net
@@ -90,7 +88,8 @@ namespace Net
         SessionNetZ *session_net_z;
         u8 gap1[0x11C];
         StationBufferManager *station_buffer_mgr;
-        u8 gap2[8];
+        u8 gap2[4];
+        u32 local_station_id;
         u32 local_player_id;
         u8 gap3[0x4C];
         NetworkPlayerDataManager *network_player_data_mgr;
