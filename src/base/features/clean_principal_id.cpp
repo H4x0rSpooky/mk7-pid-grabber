@@ -7,8 +7,6 @@
 
 using namespace CTRPluginFramework;
 
-#include <base/logger.hpp>
-
 namespace base
 {
     void features::clean_principal_id()
