@@ -124,4 +124,9 @@ struct PlayerInfo
     size_t id;
     bool loaded;
     OpponentInfo info;
+
+    constexpr bool operator==(PlayerInfo const &player) const
+    {
+        return (player.info.name == info.name && player.info.principal_id == info.principal_id);
+    }
 };
