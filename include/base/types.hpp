@@ -124,6 +124,7 @@ struct PlayerInfo
     size_t id;
     bool loaded;
     OpponentInfo info;
+    Net::NetworkPlayerData *instance;
 
     constexpr bool operator==(PlayerInfo const &player) const
     {
