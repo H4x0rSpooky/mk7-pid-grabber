@@ -3,8 +3,6 @@
 #include <base/features.hpp>
 #include <base/menu.hpp>
 
-#include <base/logger.hpp>
-
 namespace base
 {
     void hooks::Sequence_MenuWiFi_Confirm_onPageEnter(u32 _this)
