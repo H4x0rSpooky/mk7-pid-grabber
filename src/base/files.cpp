@@ -8,14 +8,15 @@ namespace base
 
 	files::files()
 	{
-        auto logger_path = "mk7_session.log";
-            
-        if (File::Open(m_logger, logger_path, File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+#ifdef _DEBUG   
+        if (File::Open(m_logger, "debug.log", File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+            abort();
+#endif
+
+        if (File::Open(m_session_log, "mk7_session.log", File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
         
-        auto settings_path = "settings.json";
-        
-        if (File::Open(m_settings, settings_path, File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
+        if (File::Open(m_settings, "settings.json", File::Mode::READ | File::Mode::WRITE | File::Mode::CREATE | File::Mode::SYNC) != File::OPResult::SUCCESS)
             abort();
 
         g_files = this;
@@ -26,7 +27,11 @@ namespace base
         g_files = nullptr;
 
         m_settings.Close();
-		m_logger.Close();
+        m_session_log.Close();
+
+#ifdef _DEBUG
+        m_logger.Close();
+#endif
 	}
 
     void files::set_working_directory()

@@ -1,6 +1,7 @@
 #include <base/entries.hpp>
 
 #include <base/pointers.hpp>
+#include <base/menu.hpp>
 
 using namespace CTRPluginFramework;
 
@@ -51,10 +52,17 @@ namespace base
                     {
                         std::string message_box{};
 
-                        u32 principal_id = player.info.principal_id;
+                        u32 clean_pid{};
 
-                        if (auto clean_pid = utilities::get_principal_id(player.id))
+                        if (auto station = utilities::get_station_from_list(g_menu->station_list, utilities::get_station_id(player.id, true)))
+                            clean_pid = utilities::get_principal_id(station);
+                        else
+                            clean_pid = utilities::get_principal_id(player.id);
+
+                        if (clean_pid)
                         {
+                            u32 principal_id = player.info.principal_id;
+
                             if (clean_pid != principal_id)
                             {
                                 message_box += utilities::format_output("Spoofed PID (DEC)", std::to_string(principal_id), false);

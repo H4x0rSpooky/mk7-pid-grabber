@@ -28,6 +28,13 @@ namespace base
     {
         CTRPluginFramework::Lock _(m_mutex);
 
-        g_files->m_logger.WriteLine(str);
+        g_files->m_logger.WriteLine("[" + logger::get_current_date_time_string(true) + "] " + str);
+    }
+
+    void logger::dump(std::string str)
+    {
+        CTRPluginFramework::Lock _(m_mutex);
+
+        g_files->m_session_log.WriteLine(str);
     }
 }

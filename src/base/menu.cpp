@@ -19,7 +19,7 @@
 #define GAME_SESSION_NOTE Color::SkyBlue << "This fetches the current players inside an active game session or current lobby.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define OPPONENT_LIST_NOTE Color::SkyBlue << "This fetches only the opponent list from your save data, excluding the friend list.\n\n" << Color::DodgerBlue << "Press \uE000 and select a player name to display their current Principal ID."
 #define RENDER_OPTIMIZATIONS_NOTE Color::SkyBlue << "This entry disables the 3D and uncaps the FPS on the bottom screen during races."
-#define SESSION_LOGGER_NOTE Color::SkyBlue << "This entry creates a detailed dump of the latest game session you played in.\n\n" << Color::DodgerBlue << "sd:\\luma\\plugins\\00040000" << Utils::ToHex(Process::GetTitleID()) << "\\" << NAME << "\\" << g_files->m_logger.GetName()
+#define SESSION_LOGGER_NOTE Color::SkyBlue << "This entry creates a detailed dump of the latest game session you played in.\n\n" << Color::DodgerBlue << "sd:\\luma\\plugins\\00040000" << Utils::ToHex(Process::GetTitleID()) << "\\" << NAME << "\\" << g_files->m_session_log.GetName()
 
 namespace base
 {
@@ -62,6 +62,8 @@ namespace base
         create();
         
         finalize();
+
+        station_list.clear();
 
         g_menu = this;
     }
