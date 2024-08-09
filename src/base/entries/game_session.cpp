@@ -22,7 +22,16 @@ namespace base
                 
                 std::string name = utilities::parse_name(player_data);
 
-                list.push_back({ i, player_data->loaded, { name, player_data->principal_id } });
+                PlayerInfo player = { i, player_data->loaded, { name, player_data->principal_id } };
+
+                // adjust duplicates since they are usually CPUs
+                if (std::find(list.begin(), list.end(), player) != list.end())
+                {
+                    player.info.name = "Player";
+                    player.loaded = false;
+                }
+
+                list.push_back(player);
             }
 
             if (!list.empty())
