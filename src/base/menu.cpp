@@ -39,10 +39,10 @@ namespace base
         m_plugin_menu->SynchronizeWithFrame(true);
         m_plugin_menu->ShowWelcomeMessage(false);
 
-        auto settings = FwkSettings::Get();
-
 #ifndef _DEBUG
         m_plugin_menu->SetHexEditorState(false);
+		
+		auto settings = FwkSettings::Get();
 
         settings.AllowActionReplay = false;
 		settings.AllowSearchEngine = false;
@@ -58,6 +58,13 @@ namespace base
         };
 
         m_plugin_menu->OnClosing = []() { g_settings.store(); };
+		
+        m_plugin_menu->OnOpening = []()
+        {
+            Sleep(Milliseconds(100));
+            
+            return true;
+        };
 
         create();
         

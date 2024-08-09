@@ -25,37 +25,39 @@ namespace base
             
             session += std::format("\n\nPlayer Amount: {:d}\n\nYou were in Slot: {:d}\n", utilities::get_player_amount(false), network_engine->local_player_id);
 
-            for (size_t i = 0; i < utilities::get_player_amount(false); i++)
-            {
-                if (utilities::is_local_client(i, false))
-                    continue;
-                
-                auto player_data = utilities::get_network_player_data(i);
+            std::vector<PlayerInfo> list = utilities::get_player_list(true, true);
 
-                if (player_data->loaded)
+            if (list.empty())
+                utilities::print_error("Could not fetch the player list\n\nOperation: Logging the Session", true);
+
+            for (auto player : list)
+            {
+                auto slot = (player.id == 0 ? "0 (Host)" : std::to_string(player.id));
+
+                if (player.loaded)
                 {
-                    auto station = utilities::get_station_from_list(g_menu->station_list, utilities::get_station_id(i, true));
+                    u32 station_id = utilities::get_station_id(player.id, true);
+
+                    auto station = utilities::get_station_from_list(g_menu->station_list, station_id);
 
                     if (!station)
                         utilities::print_error("Could not fetch the Station\n\nOperation: Logging the Session", true);
                     
-                    if (station->station_id != utilities::get_station_id(i, true))
+                    if (station->station_id != station_id)
                         utilities::print_error("Could not match the Station ID\n\nOperation: Logging the Session", true);
 
                     if (auto clean_pid = utilities::get_principal_id(station))
                     {
-                        auto slot = (i == 0 ? "0 (Host)" : std::to_string(i));
-
-                        if (player_data->principal_id != clean_pid)
-                            session += std::format("\nName: {} - Slot: {} - PID: {:d} (0x{:X}) - Spoofed PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, clean_pid, clean_pid, player_data->principal_id, player_data->principal_id);
+                        if (player.info.principal_id != clean_pid)
+                            session += std::format("\nName: {} - Slot: {} - PID: {:d} (0x{:X}) - Spoofed PID: {:d} (0x{:X})", player.info.name, slot, clean_pid, clean_pid, player.info.principal_id, player.info.principal_id);
                         else
-                            session += std::format("\nName: {} - Slot: {} - PID: {:d} (0x{:X})", utilities::parse_name(player_data), slot, player_data->principal_id, player_data->principal_id);
+                            session += std::format("\nName: {} - Slot: {} - PID: {:d} (0x{:X})", player.info.name, slot, player.info.principal_id, player.info.principal_id);
                     }
                     else
                         utilities::print_error("Could not retrieve the Principal ID\n\nOperation: Logging the Session", true);
                 }
                 else
-                    session += std::format("\nName: {} - Slot: {} - Disconnected (CPU)", utilities::parse_name(player_data), (i == 0 ? "0 (Host)" : std::to_string(i)));
+                    session += std::format("\nName: {} - Slot: {} - Disconnected (CPU)", player.info.name, slot);
             }
 
             g_files->m_session_log.Clear();

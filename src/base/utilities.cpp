@@ -215,4 +215,36 @@ namespace base
     {
         return (id == (is_station ? (*g_pointers->m_network_engine)->local_station_id : (*g_pointers->m_network_engine)->local_player_id));
     }
+
+    bool utilities::is_duplicate(std::vector<PlayerInfo> list, PlayerInfo player)
+    {
+        return (std::find(list.begin(), list.end(), player) != list.end());
+    }
+
+    std::vector<PlayerInfo> utilities::get_player_list(bool exclude_local_client, bool exclude_duplicates)
+    {
+        std::vector<PlayerInfo> list{};
+
+        for (size_t i = 0; i < utilities::get_player_amount(false); i++)
+        {
+            if (exclude_local_client && utilities::is_local_client(i, false))
+                continue;
+
+            auto player_data = utilities::get_network_player_data(i);
+            
+            std::string name = utilities::parse_name(player_data);
+
+            PlayerInfo player = { i, player_data->loaded, { name, player_data->principal_id }, player_data };
+
+            if (exclude_duplicates && utilities::is_duplicate(list, player))
+            {
+                player.info.name = "Player";
+                player.loaded = false;
+            }
+
+            list.push_back(player);
+        }
+
+        return list;
+    }
 }
