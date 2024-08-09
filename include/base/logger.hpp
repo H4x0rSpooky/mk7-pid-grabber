@@ -15,6 +15,8 @@ namespace base
 		template <typename ...args_t>
 		void info(std::format_string<args_t ...>, args_t &&...);
 
+		void dump(std::string);
+
 		static std::string get_current_date_time_string(bool human_readable);
 
 	private:
@@ -29,6 +31,6 @@ namespace base
         auto str = std::format(fmt, std::forward<args_t>(args)...);
         log(str);
     }
-
+	
 	inline logger g_logger;
 }

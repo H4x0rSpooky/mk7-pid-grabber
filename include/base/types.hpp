@@ -121,13 +121,7 @@ struct OpponentInfo
 
 struct PlayerInfo
 {
-    u32 id;
+    size_t id;
     bool loaded;
-    OpponentInfo info;
-};
-
-struct PlayerLog
-{
-    u8 player_slot;
     OpponentInfo info;
 };

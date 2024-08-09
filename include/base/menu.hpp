@@ -1,5 +1,7 @@
 #pragma once
 
+#include <base/types.hpp>
+
 #include <CTRPluginFramework.hpp>
 
 #include <map>
@@ -14,6 +16,7 @@ namespace base
 
         void run();
 
+        std::vector<nn::nex::Station *> station_list;
     private:
         friend struct entries;
         friend class features;
