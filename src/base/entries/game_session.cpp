@@ -45,7 +45,7 @@ namespace base
 
                     if (auto station = utilities::get_station_from_list(g_menu->station_list, utilities::get_station_id(player.id, true)))
                     {
-                            if (station->station_id != utilities::get_station_id(player.id, true))
+						if (station->station_id != utilities::get_station_id(player.id, true))
                             utilities::print_error("Could not match the Station ID\n\nOperation: Reading the target", true);
 
                         clean_pid = utilities::get_principal_id(station);
